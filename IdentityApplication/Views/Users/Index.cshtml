@@ -1,0 +1,73 @@
+﻿@model IEnumerable<IdentityApplication.Models.User>
+@{
+    ViewBag.Title = "Users list";
+}
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="collapse navbar-collapse">
+
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item" style="padding-right:30px">
+                <a id="Delete">
+                    <img src="~/image/delete.png" width="30" height="30" class="d-inline-block align-top" alt="">
+                </a>
+            </li>
+            <li class="nav-item" style="padding-right:30px">
+                <a id="Lock">
+                    <img src="~/image/block.png" width="30" height="30" class="d-inline-block align-top" alt="">
+                </a>
+            </li>
+            <li class="nav-item">
+                <a id="UnLock">
+                    <img src="~/image/padlock.png" width="30" height="30" class="d-inline-block align-top" alt="">
+                </a>
+            </li>
+        </ul>
+
+    </div>
+</nav>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">FullName</th>
+            <th scope="col">Email</th>
+            <th scope="col">Registration date</th>
+            <th scope="col">Last login date</th>
+            <th scope="col">Status</th>
+            <th scope="col">
+                <input type="checkbox" name="all" id="checkall" class="btn btn-outline-secondary"> Check/Uncheck All
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @{ int rowNo = 0; }
+
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>@(rowNo += 1)</td>
+                <td>@user.FullName</td>
+                <td>@user.Email</td>
+                <td>@user.DateCreate</td>
+                <td>@user.DateLastLogin</td>
+                @if (@user.Status == false)
+                {
+                    <td>UnLock</td>
+                }
+                else
+                {
+                    <td>Lock</td>
+                }
+                <td>
+                    <input type="checkbox" class="cb-element" name="checkItem" value="@user.Id">
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<link rel="stylesheet" href="https://snipp.ru/cdn/bootstrap/4.3/bootstrap.min.css">
+<script src="https://snipp.ru/cdn/jquery/2.1.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="~/js/user.js"></script>"></script>
