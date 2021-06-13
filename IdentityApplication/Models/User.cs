@@ -3,7 +3,7 @@ using System;
 
 namespace IdentityApplication.Models
 {
-    public sealed  class User : IdentityUser
+    public sealed class User : IdentityUser
     {  
         public string FullName { get; set; }
 
@@ -11,7 +11,6 @@ namespace IdentityApplication.Models
 
         public DateTime DateLastLogin { get; set; }
 
-        public bool Status { get; set; }
-   
+        public bool IsLock { get; set; }   
     }
 }

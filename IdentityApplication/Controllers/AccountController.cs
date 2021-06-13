@@ -65,15 +65,11 @@ namespace IdentityApplication.Controllers
         {
             var user = await _signInManager.UserManager.FindByEmailAsync(model.Email);
 
-            if (user.Status == true)
+            if (user.IsLock == true)
             {
                 const string message = "I am sorry. You are lock in this system. Please call to administrator.";
-                var error = new ErrorViewModel
-                {
-                    Message = message,
-                };
 
-                return RedirectToAction("Error", "Home", error);
+                return RedirectToAction("Error", "Home", new { message = message });
             }
 
             if (ModelState.IsValid)

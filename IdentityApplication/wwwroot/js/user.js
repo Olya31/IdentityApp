@@ -1,27 +1,28 @@
-﻿ $(function () {
-        $('#checkall').change(function () {
-            $('.cb-element').prop('checked', this.checked);
-        });
+﻿$(function () {
+    $('#checkall').change(function () {
+        $('.cb-element').prop('checked', this.checked);
+    });
 
-        $('.cb-element').change(function () {
-            if ($('.cb-element:checked').length == $('.cb-element').length) {
-                $('#checkall').prop('checked', true);
-            }
-            else {
-                $('#checkall').prop('checked', false);
-            }
-        });
+    $('.cb-element').change(function () {
+        if ($('.cb-element:checked').length == $('.cb-element').length) {
+            $('#checkall').prop('checked', true);
+        }
+        else {
+            $('#checkall').prop('checked', false);
+        }
+    });
 
-        $("#Delete").click(function () {
-            var a = $('input:checked');
-            var out = [];
+    $("#delete").click(function () {
+        var a = $('input:checked');
+        var out = [];
 
-            for (var x = 0; x < a.length; x++) {
-                out.push(a[x].value);
-            }
+        for (var x = 0; x < a.length; x++) {
+            out.push(a[x].value);
+        }
 
+        if (out.length > 0) {
             $.ajax({
-                url: "/Users/Delete",
+                url: "/users/delete",
                 type: "POST",
                 data: { selectedObjects: out },
                 success: function (response) {
@@ -33,17 +34,21 @@
                     console.log(textStatus, errorThrown);
                 }
             });
-        });
+        }
 
-        $("#Lock").click(function () {
-            var a = $('input:checked');
-            var out = [];
+    });
 
-            for (var x = 0; x < a.length; x++) {
-                out.push(a[x].value);
-            }
+    $("#lock").click(function () {
+        var a = $('input:checked');
+        var out = [];
+
+        for (var x = 0; x < a.length; x++) {
+            out.push(a[x].value);
+        }
+
+        if (out.length > 0) {
             $.ajax({
-                url: "/Users/Lock",
+                url: "/users/lock",
                 type: "POST",
                 data: { selectedObjects: out },
                 success: function (response) {
@@ -57,17 +62,21 @@
                     console.log(textStatus, errorThrown);
                 }
             });
-        });
+        }
 
-        $("#UnLock").click(function () {
-            var a = $('input:checked');
-            var out = [];
+    });
 
-            for (var x = 0; x < a.length; x++) {
-                out.push(a[x].value);
-            }
+    $("#unlock").click(function () {
+        var a = $('input:checked');
+        var out = [];
+
+        for (var x = 0; x < a.length; x++) {
+            out.push(a[x].value);
+        }
+
+        if (out.length > 0) {
             $.ajax({
-                url: "/Users/UnLock",
+                url: "/users/unlock",
                 type: "POST",
                 data: { selectedObjects: out },
                 success: function (response) {
@@ -79,5 +88,6 @@
                     console.log(textStatus, errorThrown);
                 }
             });
-        });
+        }
     });
+});

@@ -27,9 +27,10 @@ namespace IdentityApplication.ViewModels
         public string PasswordConfirm { get; set; }
 
         public DateTime DateCreate { get; set; } = DateTime.Now;
+
         public DateTime DateLastLogin { get; set; } = DateTime.Now;
 
-        public bool Status { get; set; } = false;
+        public bool IsLock { get; set; } = false;
 
         public User ToUser()
         {

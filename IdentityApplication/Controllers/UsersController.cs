@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -26,7 +27,7 @@ namespace IdentityApplication.Controllers
         public IActionResult Index() => View(_userManager.Users.ToList());
 
         [HttpPost]
-        public async Task<ActionResult> Delete(Guid[] selectedObjects)
+        public async Task<ActionResult> Delete(IEnumerable<Guid> selectedObjects)
         {
             try
             {
@@ -45,7 +46,7 @@ namespace IdentityApplication.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Lock(Guid[] selectedObjects)
+        public async Task<ActionResult> Lock(IEnumerable<Guid> selectedObjects)
         {
             var isRedirect = false;
 
@@ -57,7 +58,7 @@ namespace IdentityApplication.Controllers
 
                     if (user != null)
                     {
-                        user.Status = true;
+                        user.IsLock = true;
 
                         await _userManager.UpdateAsync(user);
 
@@ -82,7 +83,7 @@ namespace IdentityApplication.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> UnLock(Guid[] selectedObjects)
+        public async Task<ActionResult> UnLock(IEnumerable<Guid> selectedObjects)
         {
             try
             {
@@ -96,7 +97,7 @@ namespace IdentityApplication.Controllers
             return Ok(true);
         }
 
-        private async Task UnLockProcessingAsync(Guid[] selectedObjects)
+        private async Task UnLockProcessingAsync(IEnumerable<Guid> selectedObjects)
         {
             foreach (Guid guid in selectedObjects)
             {
@@ -104,7 +105,7 @@ namespace IdentityApplication.Controllers
 
                 if (user != null)
                 {
-                    user.Status = false;
+                    user.IsLock = false;
                     await _userManager.UpdateAsync(user);
                 }
             }
