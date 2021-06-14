@@ -55,7 +55,7 @@
                     if (response.isRedirectToLogin == true) {
                         window.location.href = "https://localhost:5001/account/login";
                     } else {
-                        Location.reload();
+                        location.reload();
                     }
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
